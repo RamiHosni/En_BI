@@ -53,6 +53,8 @@ SELECT * from daily_perf
 WHERE rn_top <= 3 OR rn_bottom <= 3
 
 
+
+
 --Question 4 my data set 
 WITH base AS (
   SELECT
@@ -76,8 +78,6 @@ SELECT
     WHEN case_closed_successful_date IS NOT NULL THEN lead_id
   END) AS converted_leads,
   AVG(days_to_step) AS avg_days_to_step,
-  PERCENTILE_CONT(0.5)
-    WITHIN GROUP (ORDER BY days_to_step) AS median_days_to_step
 FROM base
 GROUP BY
   lead_cohort_month,
@@ -87,4 +87,5 @@ ORDER BY
   lead_cohort_month,
   marketing_channel,
   sales_funnel_steps
+
 
