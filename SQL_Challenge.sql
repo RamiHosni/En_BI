@@ -68,7 +68,6 @@ WITH base AS (
   LEFT JOIN sales_funnel sf
     ON l.lead_id = sf.lead_id
 )
-
 SELECT
   lead_cohort_month,
   marketing_channel,
@@ -87,5 +86,6 @@ ORDER BY
   lead_cohort_month,
   marketing_channel,
   sales_funnel_steps
+
 
 
