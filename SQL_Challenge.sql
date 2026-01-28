@@ -2,7 +2,7 @@
 SELECT
     MIN(l.lead_created_date) AS earliest_lead_created_date, -- minimum date from the leads (first created)
     MAX(sf.case_closed_successful_date) AS latest_case_closed_successful_date --the last day of a deals closure
-FROM leads l join sales_funnel sf on l.lead_id = sf.lead_id
+FROM leads l left join sales_funnel sf on l.lead_id = sf.lead_id
 
 
 
@@ -76,7 +76,7 @@ SELECT
   COUNT(DISTINCT CASE
     WHEN case_closed_successful_date IS NOT NULL THEN lead_id
   END) AS converted_leads,
-  AVG(days_to_step) AS avg_days_to_step,
+  AVG(days_to_step) AS avg_days_to_step
 FROM base
 GROUP BY
   lead_cohort_month,
@@ -86,6 +86,7 @@ ORDER BY
   lead_cohort_month,
   marketing_channel,
   sales_funnel_steps
+
 
 
 
