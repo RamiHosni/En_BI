@@ -18,13 +18,15 @@ SELECT
   l.marketing_channel,
   COUNT(DISTINCT l.lead_id) AS total_leads,
   COUNT(DISTINCT pv.lead_id) AS pv_sold_leads,
-  COUNT(DISTINCT pv.lead_id)::float / COUNT(DISTINCT l.lead_id) AS conversion_rate, -- pv leads / total leads
-  AVG(pv.pv_sold_date::date - l.lead_created_date::date) AS avg_days_to_conversion -- from the lead is created to finalized
+  ROUND(COUNT(DISTINCT pv.lead_id)::float / COUNT(DISTINCT l.lead_id),3) AS conversion_rate, -- pv leads / total leads
+  ROUND(AVG(pv.pv_sold_date::date - l.lead_created_date::date)) AS avg_days_to_conversion -- from the lead is created to finalized
 FROM leads l
 LEFT JOIN pv_sales pv -- all leads
   ON l.lead_id = pv.lead_id
 GROUP BY l.marketing_channel
 ORDER BY conversion_rate DESC
+
+
 
 
 
@@ -76,7 +78,7 @@ SELECT
   COUNT(DISTINCT CASE
     WHEN case_closed_successful_date IS NOT NULL THEN lead_id
   END) AS converted_leads,
-  AVG(days_to_step) AS avg_days_to_step
+  round(AVG(days_to_step)) AS avg_days_to_step
 FROM base
 GROUP BY
   lead_cohort_month,
@@ -86,6 +88,7 @@ ORDER BY
   lead_cohort_month,
   marketing_channel,
   sales_funnel_steps
+
 
 
 
