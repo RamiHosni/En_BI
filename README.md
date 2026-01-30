@@ -82,7 +82,7 @@ The dataset enables analysis of:
 |------------------------|-------------|
 | `lead_cohort_month`    | Month when the lead was created |
 | `marketing_channel`    | Marketing channel that sourced the lead |
-| `sales_funnel_steps`   | Funnel step (e.g., Sales Call 1 → Sales Call 2 → PV System Sold) |
+| `sales_funnel_steps`   | Funnel step (Sales Call 1 → Sales Call 2 → PV System Sold) |
 | `leads_in_chohort`     | Number of leads in each step |
 | `converted_leads`      | Number of leads in each step which was done(have a closed date) |
 | `avg_days_to_step`     | Average Time (in days) to reach each step |
@@ -102,6 +102,7 @@ The dataset enables analysis of:
 **Assumptions / General Notes:**  
 - Leads without a successful PV System Sold case are treated as right-censored (still in progress).  
 - Conversion rate is calculated based on distinct leads per channel.  
-- Time-to-conversion uses the difference in days between `lead_created_date` and `case_closed_successful_date`.  
+- Time-to-conversion uses the difference in days between `lead_created_date` and `case_closed_successful_date`.
+- The dataset answers quetions 4 in addition to other observations.
 
 
